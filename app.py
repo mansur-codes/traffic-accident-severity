@@ -21,60 +21,170 @@ st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
     
-    html, body, [class*="css"] {
+    html, body, .stApp {
         font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #0b0f19;
+        color: #ffffff;
     }
 
+    .block-container {
+        padding-top: 2rem !important;
+        padding-bottom: 3.5rem !important;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    /* Main Hero Header */
     .main-header {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 16px;
-        padding: 2rem 2.5rem;
+        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 20px;
+        padding: 2.25rem 2.5rem;
         margin-bottom: 2rem;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
     }
 
     .main-title {
-        font-size: 2.2rem;
+        font-size: 2.3rem;
         font-weight: 800;
+        letter-spacing: -0.025em;
         background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.6rem;
+        line-height: 1.25;
     }
 
     .main-desc {
-        color: #94a3b8;
+        color: #e2e8f0 !important;
         font-size: 1.05rem;
+        line-height: 1.6;
         margin: 0;
+        max-width: 780px;
     }
 
-    .section-card {
-        background: rgba(30, 41, 59, 0.45);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 14px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        backdrop-filter: blur(8px);
+    /* Container Card Styling (st.container(border=True)) */
+    div[data-testid="stVerticalBlockBorderWrapper"] {
+        border-radius: 18px !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        background: rgba(17, 24, 39, 0.75) !important;
+        backdrop-filter: blur(16px);
+        box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.35);
+        padding: 1.6rem 1.75rem !important;
+        margin-bottom: 1.5rem !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
+    div[data-testid="stVerticalBlockBorderWrapper"]:hover {
+        border-color: rgba(99, 102, 241, 0.5) !important;
+        box-shadow: 0 10px 30px -2px rgba(99, 102, 241, 0.15);
+    }
+
+    /* Crisp White Typography for Section Titles & Labels */
     .section-title {
-        font-size: 1.15rem;
+        font-size: 1.25rem;
         font-weight: 700;
-        color: #f1f5f9;
-        margin-bottom: 1.25rem;
+        color: #ffffff !important;
+        margin-bottom: 1.35rem;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.6rem;
+        letter-spacing: -0.01em;
     }
 
-    .severity-result-card {
-        border-radius: 16px;
-        padding: 1.75rem 2rem;
+    .feature-group-label {
+        font-size: 0.98rem;
+        font-weight: 700;
+        color: #ffffff !important;
+        margin-top: 1.35rem;
+        margin-bottom: 0.75rem;
+        letter-spacing: 0.01em;
+    }
+
+    /* All Input Field Labels & Form Text in High-Contrast White */
+    label[data-testid="stWidgetLabel"] p,
+    label[data-testid="stWidgetLabel"] span,
+    div[data-testid="stWidgetLabel"] p,
+    div[data-testid="stWidgetLabel"] label {
+        font-weight: 600 !important;
+        font-size: 0.94rem !important;
+        color: #ffffff !important;
+    }
+
+    /* Radio and Checkbox Label Text */
+    div[data-testid="stRadio"] label p,
+    div[data-testid="stRadio"] label span,
+    div[data-testid="stRadio"] [role="radiogroup"] p,
+    div[data-testid="stCheckbox"] label p,
+    div[data-testid="stCheckbox"] label span {
+        color: #f1f5f9 !important;
+        font-weight: 500 !important;
+        font-size: 0.95rem !important;
+    }
+
+    /* Help tooltips & icons */
+    [data-testid="stTooltipHoverTarget"] svg {
+        fill: #94a3b8 !important;
+    }
+
+    /* Model Info Pill */
+    .model-info-box {
+        background: rgba(99, 102, 241, 0.15);
+        border-left: 3px solid #818cf8;
+        padding: 0.85rem 1.15rem;
+        border-radius: 0 12px 12px 0;
+        font-size: 0.95rem;
+        color: #f8fafc !important;
+        line-height: 1.5;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .model-info-box strong {
+        color: #ffffff !important;
+    }
+
+    /* Primary Action Button */
+    .stButton {
         margin-top: 1.5rem;
-        border-width: 1px;
+        margin-bottom: 1.5rem;
+    }
+
+    .stButton>button {
+        width: 100%;
+        height: 3.5rem;
+        background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #4f46e5 100%);
+        color: #ffffff !important;
+        font-weight: 700;
+        font-size: 1.15rem;
+        letter-spacing: 0.015em;
+        border: none;
+        border-radius: 14px;
+        box-shadow: 0 6px 20px -2px rgba(79, 70, 229, 0.45);
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .stButton>button:hover {
+        background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #4338ca 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -2px rgba(79, 70, 229, 0.6);
+        color: #ffffff !important;
+    }
+
+    .stButton>button:active {
+        transform: translateY(0);
+    }
+
+    /* Severity Result Display */
+    .severity-result-card {
+        border-radius: 18px;
+        padding: 2rem 2.25rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-width: 1.5px;
         border-style: solid;
-        animation: fadeIn 0.4s ease-in-out;
+        animation: fadeIn 0.4s ease-out;
     }
 
     @keyframes fadeIn {
@@ -83,55 +193,42 @@ st.markdown("""
     }
 
     .sev-1 {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(5, 150, 105, 0.05) 100%);
-        border-color: rgba(16, 185, 129, 0.4);
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.08) 100%);
+        border-color: rgba(16, 185, 129, 0.5);
+        box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2);
     }
     .sev-2 {
-        background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.05) 100%);
-        border-color: rgba(245, 158, 11, 0.4);
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(217, 119, 6, 0.08) 100%);
+        border-color: rgba(245, 158, 11, 0.5);
+        box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.2);
     }
     .sev-3 {
-        background: linear-gradient(135deg, rgba(249, 115, 22, 0.12) 0%, rgba(234, 88, 12, 0.05) 100%);
-        border-color: rgba(249, 115, 22, 0.4);
+        background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(234, 88, 12, 0.08) 100%);
+        border-color: rgba(249, 115, 22, 0.5);
+        box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.2);
     }
     .sev-4 {
-        background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(220, 38, 38, 0.05) 100%);
-        border-color: rgba(239, 68, 68, 0.4);
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.08) 100%);
+        border-color: rgba(239, 68, 68, 0.5);
+        box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.2);
     }
 
     .severity-heading {
-        font-size: 1.75rem;
+        font-size: 1.85rem;
         font-weight: 800;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.6rem;
+        line-height: 1.2;
     }
-    .sev-1 .severity-heading { color: #34d399; }
-    .sev-2 .severity-heading { color: #fbbf24; }
-    .sev-3 .severity-heading { color: #fb923c; }
-    .sev-4 .severity-heading { color: #f87171; }
+    .sev-1 .severity-heading { color: #34d399 !important; }
+    .sev-2 .severity-heading { color: #fbbf24 !important; }
+    .sev-3 .severity-heading { color: #fb923c !important; }
+    .sev-4 .severity-heading { color: #f87171 !important; }
 
     .severity-explanation {
-        font-size: 1.1rem;
-        color: #e2e8f0;
+        font-size: 1.15rem;
+        color: #ffffff !important;
         font-weight: 500;
-        line-height: 1.5;
-    }
-
-    .stButton>button {
-        width: 100%;
-        background: linear-gradient(90deg, #2563eb 0%, #4f46e5 100%);
-        color: white;
-        font-weight: 700;
-        font-size: 1.1rem;
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.35);
-        transition: all 0.2s ease-in-out;
-    }
-    .stButton>button:hover {
-        background: linear-gradient(90deg, #1d4ed8 0%, #4338ca 100%);
-        transform: translateY(-1px);
-        box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+        line-height: 1.6;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -195,21 +292,20 @@ if load_errors:
 # ==========================================
 # MODEL SELECTION
 # ==========================================
-st.markdown('<div class="section-card">', unsafe_allow_html=True)
-col_model, col_info = st.columns([1, 2])
-with col_model:
-    model_choice = st.radio(
-        "Choose Prediction Model:",
-        options=["Random Forest", "XGBoost"],
-        horizontal=True,
-        help="Select which trained ensemble model to use for evaluating severity."
-    )
-with col_info:
-    if model_choice == "Random Forest":
-        st.caption("🌲 **Random Forest Classifier**: Robust ensemble of decision trees trained with balanced class weights.")
-    else:
-        st.caption("⚡ **XGBoost Classifier**: Gradient boosted decision trees optimized for multi-class accident severity classification.")
-st.markdown('</div>', unsafe_allow_html=True)
+with st.container(border=True):
+    col_model, col_info = st.columns([1, 2], gap="large")
+    with col_model:
+        model_choice = st.radio(
+            "Choose Prediction Model:",
+            options=["Random Forest", "XGBoost"],
+            horizontal=True,
+            help="Select which trained ensemble model to use for evaluating severity."
+        )
+    with col_info:
+        if model_choice == "Random Forest":
+            st.markdown('<div class="model-info-box">🌲 <span><strong>Random Forest Classifier</strong>: Robust ensemble of decision trees trained with balanced class weights for stability.</span></div>', unsafe_allow_html=True)
+        else:
+            st.markdown('<div class="model-info-box">⚡ <span><strong>XGBoost Classifier</strong>: High-performance gradient boosted decision trees optimized for multi-class classification.</span></div>', unsafe_allow_html=True)
 
 # ==========================================
 # INPUT FIELDS (TWO-COLUMN LAYOUT)
@@ -236,102 +332,98 @@ SEVERITY_DESCRIPTIONS = {
     4: "Major incident. Severe impact on traffic, expect long delays"
 }
 
-col_left, col_right = st.columns(2)
+col_left, col_right = st.columns(2, gap="large")
 
 # --- LEFT COLUMN: Weather & Environmental Conditions ---
 with col_left:
-    st.markdown('<div class="section-card">', unsafe_allow_html=True)
-    st.markdown('<div class="section-title">🌤️ Environmental & Weather Conditions</div>', unsafe_allow_html=True)
-    
-    temperature = st.number_input(
-        "Temperature in Fahrenheit",
-        min_value=-20.0,
-        max_value=120.0,
-        value=65.0,
-        step=1.0,
-        help="Ambient temperature recorded at the accident scene (-20°F to 120°F)."
-    )
-    
-    visibility = st.number_input(
-        "Visibility in miles",
-        min_value=0.0,
-        max_value=10.0,
-        value=10.0,
-        step=0.5,
-        help="Atmospheric visibility in miles (0 to 10 miles)."
-    )
-    
-    wind_speed = st.number_input(
-        "Wind Speed in mph",
-        min_value=0.0,
-        max_value=100.0,
-        value=10.0,
-        step=1.0,
-        help="Wind speed recorded in miles per hour (0 to 100 mph)."
-    )
-    
-    weather_condition = st.selectbox(
-        "Weather condition",
-        options=WEATHER_OPTIONS,
-        index=0,
-        help="Primary weather phenomenon observed at the time of the collision."
-    )
-    
-    time_of_day = st.selectbox(
-        "Time of day",
-        options=["Day", "Night"],
-        index=0,
-        help="Ambient light condition (Day vs. Night based on sunrise/sunset)."
-    )
-    st.markdown('</div>', unsafe_allow_html=True)
+    with st.container(border=True):
+        st.markdown('<div class="section-title">🌤️ Environmental & Weather Conditions</div>', unsafe_allow_html=True)
+        
+        temperature = st.number_input(
+            "Temperature in Fahrenheit",
+            min_value=-20.0,
+            max_value=120.0,
+            value=65.0,
+            step=1.0,
+            help="Ambient temperature recorded at the accident scene (-20°F to 120°F)."
+        )
+        
+        visibility = st.number_input(
+            "Visibility in miles",
+            min_value=0.0,
+            max_value=10.0,
+            value=10.0,
+            step=0.5,
+            help="Atmospheric visibility in miles (0 to 10 miles)."
+        )
+        
+        wind_speed = st.number_input(
+            "Wind Speed in mph",
+            min_value=0.0,
+            max_value=100.0,
+            value=10.0,
+            step=1.0,
+            help="Wind speed recorded in miles per hour (0 to 100 mph)."
+        )
+        
+        weather_condition = st.selectbox(
+            "Weather condition",
+            options=WEATHER_OPTIONS,
+            index=0,
+            help="Primary weather phenomenon observed at the time of the collision."
+        )
+        
+        time_of_day = st.selectbox(
+            "Time of day",
+            options=["Day", "Night"],
+            index=0,
+            help="Ambient light condition (Day vs. Night based on sunrise/sunset)."
+        )
 
 # --- RIGHT COLUMN: Incident & Roadway Features ---
 with col_right:
-    st.markdown('<div class="section-card">', unsafe_allow_html=True)
-    st.markdown('<div class="section-title">🛣️ Incident & Roadway Infrastructure</div>', unsafe_allow_html=True)
-    
-    distance_affected = st.number_input(
-        "Distance affected in miles",
-        min_value=0.0,
-        max_value=50.0,
-        value=1.0,
-        step=0.1,
-        help="Length of the roadway segment impacted by the incident (0 to 50 miles)."
-    )
-    
-    hour_of_day = st.slider(
-        "Hour of day",
-        min_value=0,
-        max_value=23,
-        value=12,
-        help="Time the accident occurred in 24-hour military format (0 = midnight, 23 = 11 PM)."
-    )
-    
-    day_of_week = st.selectbox(
-        "Day of week",
-        options=["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        index=0,
-        help="Day of the week the incident occurred."
-    )
-    
-    st.markdown("<p style='font-weight: 600; color: #cbd5e1; margin-top: 1rem; margin-bottom: 0.5rem;'>Nearby Roadway Features:</p>", unsafe_allow_html=True)
-    
-    col_cb1, col_cb2 = st.columns(2)
-    with col_cb1:
-        junction = st.checkbox("Junction nearby", value=False)
-        traffic_signal = st.checkbox("Traffic Signal nearby", value=False)
-        crossing = st.checkbox("Crossing nearby", value=False)
-    with col_cb2:
-        amenity = st.checkbox("Amenity nearby", value=False)
-        stop_sign = st.checkbox("Stop sign nearby", value=False)
-        railway = st.checkbox("Railway nearby", value=False)
+    with st.container(border=True):
+        st.markdown('<div class="section-title">🛣️ Incident & Roadway Infrastructure</div>', unsafe_allow_html=True)
         
-    st.markdown('</div>', unsafe_allow_html=True)
+        distance_affected = st.number_input(
+            "Distance affected in miles",
+            min_value=0.0,
+            max_value=50.0,
+            value=1.0,
+            step=0.1,
+            help="Length of the roadway segment impacted by the incident (0 to 50 miles)."
+        )
+        
+        hour_of_day = st.slider(
+            "Hour of day",
+            min_value=0,
+            max_value=23,
+            value=12,
+            help="Time the accident occurred in 24-hour military format (0 = midnight, 23 = 11 PM)."
+        )
+        
+        day_of_week = st.selectbox(
+            "Day of week",
+            options=["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            index=0,
+            help="Day of the week the incident occurred."
+        )
+        
+        st.markdown('<div class="feature-group-label">Nearby Roadway Features:</div>', unsafe_allow_html=True)
+        
+        col_cb1, col_cb2 = st.columns(2, gap="medium")
+        with col_cb1:
+            junction = st.checkbox("Junction nearby", value=False)
+            traffic_signal = st.checkbox("Traffic Signal nearby", value=False)
+            crossing = st.checkbox("Crossing nearby", value=False)
+        with col_cb2:
+            amenity = st.checkbox("Amenity nearby", value=False)
+            stop_sign = st.checkbox("Stop sign nearby", value=False)
+            railway = st.checkbox("Railway nearby", value=False)
 
 # ==========================================
 # PREDICTION LOGIC & PIPELINE
 # ==========================================
-st.markdown("<br>", unsafe_allow_html=True)
 predict_clicked = st.button("🚨 Predict Accident Severity", use_container_width=True)
 
 if predict_clicked:
